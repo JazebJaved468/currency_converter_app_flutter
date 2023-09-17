@@ -12,10 +12,17 @@ class _HomePageState extends State<HomePage> {
 
   num result = 297.50;
   num value = 1;
+  bool isNull = false;
   void convertCurrency() {
     num exchangeRate = 297.50;
-    value = double.parse(inputfield.text);
-    result = value * exchangeRate;
+
+    if (inputfield.text == "") {
+      isNull = true;
+    } else {
+      isNull = false;
+      value = double.parse(inputfield.text);
+      result = value * exchangeRate;
+    }
 
     setState(() {});
   }
@@ -35,8 +42,6 @@ class _HomePageState extends State<HomePage> {
     inputfield.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +75,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 margin: const EdgeInsets.only(bottom: 30),
                 child: Text(
-                  '$value = ${result.toStringAsFixed(3)} ',
+                  '$value = ${(result).toStringAsFixed(2)} ',
                   // '$value = ${result!=0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)} ',
                   style: const TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
@@ -80,8 +85,19 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              Visibility(
+                visible: isNull,
+                child: Text(
+                  "Please Enter a valid value",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 margin: const EdgeInsets.only(bottom: 20),
                 child: TextField(
                   controller: inputfield,
@@ -153,8 +169,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-
 }
 
 

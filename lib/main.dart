@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
         //   textDirection: TextDirection.ltr,
         // );
         const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
       title: "Currency Convert",
-  
     );
   }
 } 
